@@ -2,6 +2,6 @@
     "watch": ["src", "config"],
     "ext": "ts,js",
     "ignore": ["src/**/*.spec.ts"],
-    "exec": "tsc && ts-node ./release/server.js",
+    "exec": "tsc && ts-node ./release/src/server.js",
     "delay": 300
   }

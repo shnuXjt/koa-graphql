@@ -4,30 +4,40 @@ import * as bodyparser from 'koa-bodyparser';
 import * as KoaStatic from 'koa-static';
 
 import {database} from './mongodb' // 引入mongodb
-import {saveInfo, fetchInfo} from './controllers/info' // 引入info controller
-import {saveStudent, fetchStudent, fetchStudentDetail} from './controllers/student' // 引入 student controller
+import { router } from './router';
+import { schema } from './scheme/schema';
+
+const {ApolloServer, gql} = require('apollo-server-koa');
+// Construct a schema, using GraphQL schema language
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    hello: () => 'Hello world!',
+  },
+};
+
+const server = new ApolloServer({schema:schema});
 
 database();
 const app = new Koa();
-const router = new Router();
 const PORT = 4000;
+const mrouter = new Router();
+server.applyMiddleware({ app });
 
 app.use(bodyparser());
 app.use(KoaStatic(__dirname + '/public'))
 
-router.get('/test', async(ctx: any) => {
-    ctx.body = 'hello world';
-})
+mrouter.use('', router.routes());
 
-// 设置每一个路由对应的相对的控制器
-router.post('/saveinfo', saveInfo)
-router.get('/info', fetchInfo)
-router.post('/savestudent', saveStudent)
-router.get('/student', fetchStudent)
-router.get('/studentDetail', fetchStudentDetail)
 
-app.use(router.routes())
-    .use(router.allowedMethods());
+app.use(mrouter.routes())
+    .use(mrouter.allowedMethods());
 
 app.listen(PORT);
 console.log('server running on port ', PORT);
