@@ -1,19 +1,18 @@
-import {saveInfo, fetchInfo} from '../controllers/info' // 引入info controller
-import {saveStudent, fetchStudent, fetchStudentDetail} from '../controllers/student' // 引入 student controller
-
-
-
 import * as Router from 'koa-router';
+import { InfoController } from '../controllers/info';
+import { StudentContoller } from '../controllers/student';
+import { Context } from 'koa';
 
-export const router = new Router();
+const router = new Router();
+const infoController = new InfoController();
+const studentController = new StudentContoller();
 
-router.get('/test', async(ctx: any) => {
-    ctx.body = 'hello world';
-})
-
-// 设置每一个路由对应的相对的控制器
-router.post('/saveinfo', saveInfo)
-router.get('/info', fetchInfo)
-router.post('/savestudent', saveStudent)
-router.get('/student', fetchStudent)
-router.get('/studentDetail', fetchStudentDetail);
+router.post('/saveinfo', infoController.saveInfo)
+      .post('/savestudent', studentController.saveStudent)
+      .get('/info', infoController.fetchInfos)
+      .get('/student', studentController.getStudent)
+      .get('/studentDetail', studentController.getStudentDetail)
+      .get("/test", (ctx: Context, next: any) => {
+        ctx.body = 'hello koa';
+    });
+export = router;

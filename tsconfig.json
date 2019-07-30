@@ -1,33 +1,29 @@
 {
     "compilerOptions": {
-      "target": "es2017",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "removeComments": false,
-      "noImplicitAny": true,
-      "suppressImplicitAnyIndexErrors": true,
-      "lib": ["es2015"],
-      "outDir": "./release/",
-      "typeRoots": [
-        "./node_modules/@types/",
-        "./src/@types/"
-      ],
-      "baseUrl": ".",
-      "paths": {
-        "@conf/*": ["config/*"],
-        "@src/*": ["src/*"],
-        "@controllers/*": ["src/controllers/*"],
-        "@core/*": ["src/core/*"],
-        "@models/*": ["src/models/*"],
-        "@entities/*": ["src/entities/*"],
-        "@utils/*": ["src/utils/*"]
-      }
+        "target": "es2017",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "lib": ["es2015"],
+        "outDir": "./dist/",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/@types/"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@src/*": ["src/*"],
+            "@src/controllers/*": ["src/controllers/*"],
+            "@config/*": ["config/*"]
+        }
     },
     "compileOnSave": false,
     "exclude": [
-      "node_modules"
+        "/node_modules"
     ]
-  }
+}
