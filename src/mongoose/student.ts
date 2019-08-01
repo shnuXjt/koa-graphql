@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { ObjectID, ObjectId } from 'bson';
+import { ObjectId } from 'bson';
 
 const schema = mongoose.Schema;
 
@@ -29,6 +29,7 @@ StudentSchema.pre('save', function(next: any) {
     } else {
         this['meta'].updatedAt = Date.now();
     }
+    next();
 } )
 
 mongoose.model('Student', StudentSchema);

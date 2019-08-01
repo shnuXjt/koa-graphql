@@ -7,12 +7,12 @@ const router = new Router();
 const infoController = new InfoController();
 const studentController = new StudentContoller();
 
-router.post('/saveinfo', infoController.saveInfo)
-      .post('/savestudent', studentController.saveStudent)
-      .get('/info', infoController.fetchInfos)
-      .get('/student', studentController.getStudent)
-      .get('/studentDetail', studentController.getStudentDetail)
-      .get("/test", (ctx: Context, next: any) => {
+router.post('/saveinfo', infoController.saveInfo);
+router.post('/savestudent', studentController.saveStudent);
+router.get('/info', infoController.fetchInfos);
+router.get('/student', studentController.getStudent);
+router.get('/studentDetail', studentController.getStudentDetail);
+router.get("/test", (ctx: Context, next: any) => {
         ctx.body = 'hello koa';
     });
 export = router;

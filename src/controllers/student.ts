@@ -19,6 +19,7 @@ export class StudentContoller {
                 success: false
             }
         }
+        
     }
 
     async getStudent(ctx: Context, next: NextFunction) {
